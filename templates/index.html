@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<center>
+<head>
+    <title>DIABETIC RETINOPATHY DETECTION</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+	<style>
+	.remedy-box {
+    background-color: #FFB6B6;
+    border-left: 5px solid #8B0000;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: left;
+    border-radius: 8px;
+max-width: 400px;
+}
+
+.container {
+  border: 2px solid #056; 
+  padding: 10px;           
+margin: 20px;           
+  background-color: #E0E0E0; 
+  border-radius: 5px;      
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Diabetic Retinopathy Detection</h1>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result">
+                <h2>{{ prediction }}</h2>
+                <img src="{{ url_for('static', filename='uploads/' + image_path) }}" alt="Uploaded Image">
+                <div class="remedy-box">
+                    <h3>Remedy for the predicted stage of the disease:</h3>
+                    <p>{{ remedy }}</p>
+			
+
+                </div>
+<br>
+		<a href="/">Click here for next image!</a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</center>
+</html>

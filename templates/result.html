@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PREDICTION RESULTS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+   /* <style>
+.container {
+  border: 2px solid #056; 
+  padding: 10px;           
+  margin-top: 50px; 
+margin: 150px;           
+  background-color: #f9f9f9; 
+  border-radius: 5px;      
+}
+
+    </style>*/
+</head>
+<body>
+    <div class="container">
+        <h1>Result</h1>
+        <img src="{{ url_for('static', filename=image_path.split('/')[-1]) }}" alt="Uploaded Image">
+        <h2>Stage of the disease: <span>{{ predicted_class }}</span></h2>
+
+        {% if predicted_class == 'No DR' %}
+   		<div class="stage-info stage-0"><h6>✅ No signs of diabetic retinopathy. Maintain a healthy diet and 			regular eye checkups every year.<h6></div>
+	{% elif 'Mild' in predicted_class %}
+   		<div class="stage-info stage-1"><h6>⚠️ Monitor your blood sugar closely and schedule eye exams every 6 			months.<h6></div>
+	{% elif 'Moderate' in predicted_class %}
+    		<div class="stage-info stage-2"><h6>⚠️ Consult an ophthalmologist; treatment might include laser therapy 		or medications.<h6></div>
+	{% elif 'Severe' in predicted_class %}
+    		<div class="stage-info stage-3"><h6>❗ Immediate medical attention is needed; consider anti-VEGF 			injections or laser surgery.<h6></div>
+	{% elif 'Proliferative' in predicted_class or 'Stage 4' in predicted_class %}
+    		<div class="stage-info stage-4"><h6>🚨 This is an advanced stage. Immediate intervention is critical to 		avoid vision loss.<h6></div>
+	{% endif %}
+
+
+        
+    </div>
+</body>
+</html>
